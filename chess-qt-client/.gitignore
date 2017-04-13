@@ -1,1 +1,9 @@
 build/
+CMakeFiles/
+CMakeCache.txt
+*.moc
+*automoc.*
+chess-client
+*.swp*
+*.cmake
+Makefile
