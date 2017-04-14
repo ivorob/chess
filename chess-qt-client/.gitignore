@@ -7,3 +7,4 @@ chess-client
 *.swp*
 *.cmake
 Makefile
+qrc_*

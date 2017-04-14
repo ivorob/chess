@@ -23,27 +23,27 @@ private:
         this->board->setZValue(0);
         scene()->addItem(this->board);
 
-        QGraphicsPixmapItem *item = scene()->addPixmap(QPixmap(":/images/white_king.png").scaled(110, 110, Qt::KeepAspectRatio));
+        QGraphicsPixmapItem *item = scene()->addPixmap(QPixmap(":/images/white_king.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_queen.png").scaled(110, 110, Qt::KeepAspectRatio));
+        item = scene()->addPixmap(QPixmap(":/images/white_queen.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_bishop.png").scaled(110, 110, Qt::KeepAspectRatio));
+        item = scene()->addPixmap(QPixmap(":/images/white_bishop.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_knight.png").scaled(110, 110, Qt::KeepAspectRatio));
+        item = scene()->addPixmap(QPixmap(":/images/white_knight.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_rook.png").scaled(110, 110, Qt::KeepAspectRatio));
+        item = scene()->addPixmap(QPixmap(":/images/white_rook.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_pawn.png").scaled(110, 110, Qt::KeepAspectRatio));
+        item = scene()->addPixmap(QPixmap(":/images/white_pawn.png").scaled(100, 100, Qt::KeepAspectRatio));
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
     }
@@ -59,7 +59,7 @@ main(int argc, char *argv[])
     QGraphicsScene scene;
     MainWindow mainWindow(&scene);
     mainWindow.setWindowTitle("Chess Online");
-    mainWindow.setFixedSize(QSize(800, 800));
+    mainWindow.setFixedSize(QSize(700, 700));
     mainWindow.move(QApplication::desktop()->screen()->rect().center() - mainWindow.rect().center());
     mainWindow.show();
     return app.exec();
