@@ -8,6 +8,7 @@ public:
     typedef QGraphicsItem VisualObject;
     typedef uint32_t objectId;
 public:
+    GameObject();
     virtual ~GameObject();
 
     virtual QString getClassId() const = 0;
@@ -15,8 +16,12 @@ public:
 
     void setId(objectId id);
     objectId getId() const;
+
+    VisualObject *obtainVisualObject();
+    virtual void initVisualObject(VisualObject *object) = 0;
 private:
     objectId id;
+    VisualObject *visualObject;
 };
 
 #endif //__CHESS_ONLINE_GAME_OBJECT_H__
