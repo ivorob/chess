@@ -31,21 +31,25 @@ private:
         item->setZValue(1);
         item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_bishop.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        for (int i = 0; i < 2; ++i) {
+            item = scene()->addPixmap(QPixmap(":/images/white_bishop.png").scaled(100, 100, Qt::KeepAspectRatio));
+            item->setZValue(1);
+            item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_knight.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+            item = scene()->addPixmap(QPixmap(":/images/white_knight.png").scaled(100, 100, Qt::KeepAspectRatio));
+            item->setZValue(1);
+            item->setFlag(QGraphicsItem::ItemIsMovable, true);
 
-        item = scene()->addPixmap(QPixmap(":/images/white_rook.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+            item = scene()->addPixmap(QPixmap(":/images/white_rook.png").scaled(100, 100, Qt::KeepAspectRatio));
+            item->setZValue(1);
+            item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        }
 
-        item = scene()->addPixmap(QPixmap(":/images/white_pawn.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        for (int i = 0; i < 8; ++i) {
+            item = scene()->addPixmap(QPixmap(":/images/white_pawn.png").scaled(100, 100, Qt::KeepAspectRatio));
+            item->setZValue(1);
+            item->setFlag(QGraphicsItem::ItemIsMovable, true);
+        }
     }
 private:
     ChessBoard *board;

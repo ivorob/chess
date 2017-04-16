@@ -12,7 +12,11 @@ SET (RESOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/resources)
 
 SET (SOURCES
         ${SRC_DIR}/main.cpp
-        ${SRC_DIR}/ChessBoard.cpp)
+        ${SRC_DIR}/ChessBoard.cpp
+        ${SRC_DIR}/GameObject.cpp)
+
+SET (HEADERS
+        ${SRC_DIR}/GameObject.h)
 
 SET (RESOURCES
         ${RESOURCE_DIR}/main.qrc)
