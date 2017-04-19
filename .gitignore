@@ -8,4 +8,6 @@ chess-client
 *.cmake
 Makefile
 qrc_*
-chess-server
+/chess-server/chess-server
+*tests
+*.a

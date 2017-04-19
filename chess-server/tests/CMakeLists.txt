@@ -13,6 +13,8 @@ INCLUDE_DIRECTORIES (${MAIN_INCLUDE_DIR} .)
 
 IF (WIN32)
     SET (LIBRARIES ws2_32)
+ELSE ()
+    ADD_DEFINITIONS (-std=c++11)
 ENDIF ()
 
 ADD_SUBDIRECTORY (../../thirdparty/googletest ${CMAKE_CURRENT_BINARY_DIR}/thirdparty/googletest)
