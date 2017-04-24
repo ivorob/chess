@@ -35,14 +35,15 @@ GameWorker(Socket socket1)
 std::string
 readPacket(Socket& socket)
 {
-    std::string buffer = socket.read(4);
+    std::string buffer = socket.read(5);
     std::stringstream inputStream(buffer);
 
     uint32_t size = 0;
-    inputStream >> size;
+    inputStream.read((char *)&size, sizeof(size));
+    std::cout << buffer.size() << std::endl;
     
     std::string result;
-    if (size <= 10240) {
+    if (size != 0 && size <= 10240) {
         result.append(buffer);
 
         buffer = socket.read(static_cast<int>(size));
