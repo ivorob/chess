@@ -2,6 +2,7 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <sstream>
+#include "MemoryStream.h"
 #include "ChessBoard.h"
 #include "figures/Pawn.h"
 #include "figures/King.h"
@@ -117,20 +118,17 @@ private slots:
 
         tcpSocket->connectToHost("localhost", 1111);
         if (tcpSocket->waitForConnected()) {
-            std::stringstream stream;
-            struct {
-                uint32_t size;
-                uint8_t command;
-                uint32_t version;
-            } command = {5, 0, 1};
-            stream.write((const char *)&command, sizeof(command));
+            MemoryStream stream;
+            stream.write(5); //size
+            stream.write(0); //command
+            stream.write(1); //version
 
-            const std::string& data = stream.str();
-            qDebug() << "data size: " << data.size();
-            tcpSocket->write(data.c_str(), data.size());
+            const std::string& buffer = stream.str();
+            tcpSocket->write(buffer.c_str(), buffer.size());
             qDebug() << tcpSocket->waitForBytesWritten();
         } else {
-            qDebug() << tcpSocket->errorString();
+            QMessageBox messageBox(QMessageBox::Critical, "ERROR", "Can't connect to server localhost:1111");
+            messageBox.exec();
         }
     }
 };

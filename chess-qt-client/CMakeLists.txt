@@ -23,6 +23,8 @@ SET (SOURCES
         ${SRC_DIR}/figures/Rook.cpp
         ${SRC_DIR}/figures/Knight.cpp
         ${SRC_DIR}/figures/Bishop.cpp
+        #
+        ${SRC_DIR}/MemoryStream.cpp
     )
 
 SET (HEADERS
@@ -37,6 +39,8 @@ SET (HEADERS
         ${SRC_DIR}/figures/Rook.h
         ${SRC_DIR}/figures/Knight.h
         ${SRC_DIR}/figures/Bishop.h
+        #
+        ${SRC_DIR}/MemoryStream.h
     )
 
 SET (RESOURCES
@@ -44,7 +48,7 @@ SET (RESOURCES
 
 INCLUDE_DIRECTORIES (. src/)
 
-FIND_PACKAGE (Qt5 COMPONENTS Widgets)
+FIND_PACKAGE (Qt5 COMPONENTS Widgets Network)
 
 ADD_EXECUTABLE (chess-client WIN32 ${SOURCES} ${HEADERS} ${RESOURCES})
-TARGET_LINK_LIBRARIES (chess-client Qt5::Widgets)
+TARGET_LINK_LIBRARIES (chess-client Qt5::Widgets Qt5::Network)
