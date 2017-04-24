@@ -10,7 +10,7 @@ public:
     void write(uint32_t value);
     void write(const std::string& data);
 
-    const std::string& constData() const;
+    const std::string& str() const;
 private:
     std::string data;
 };

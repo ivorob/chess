@@ -5,7 +5,7 @@ MemoryStream::MemoryStream()
 }
 
 const std::string&
-MemoryStream::constData() const
+MemoryStream::str() const
 {
     return this->data;
 }
