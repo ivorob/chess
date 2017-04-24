@@ -21,6 +21,7 @@ NetworkManager::~NetworkManager()
 bool
 NetworkManager::addToQueue(const std::string& data)
 {
+    return false;
 }
 
 std::string
