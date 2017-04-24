@@ -25,6 +25,8 @@ SET (SOURCES
         ${SRC_DIR}/figures/Bishop.cpp
         #
         ${SRC_DIR}/MemoryStream.cpp
+        ${SRC_DIR}/Registry.cpp
+        ${SRC_DIR}/NetworkManager.cpp
     )
 
 SET (HEADERS
@@ -41,6 +43,8 @@ SET (HEADERS
         ${SRC_DIR}/figures/Bishop.h
         #
         ${SRC_DIR}/MemoryStream.h
+        ${SRC_DIR}/Registry.h
+        ${SRC_DIR}/NetworkManager.h
     )
 
 SET (RESOURCES
