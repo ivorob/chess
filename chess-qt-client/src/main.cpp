@@ -1,5 +1,9 @@
 #include <QtWidgets>
+#include <QTcpSocket>
 #include <QDebug>
+#include <sstream>
+#include "MemoryStream.h"
+#include "Registry.h"
 #include "ChessBoard.h"
 #include "figures/Pawn.h"
 #include "figures/King.h"
@@ -10,7 +14,9 @@
 #include "WhiteDecorator.h"
 #include "BlackDecorator.h"
 
-class MainWindow : public QGraphicsView {
+namespace {
+
+/*class MainWindow : public QGraphicsView {
     Q_OBJECT
 public:
     MainWindow(QGraphicsScene *scene)
@@ -80,52 +86,73 @@ private:
         for (int i = 0; i < 8; ++i) {
             moveTo(addGameObject(new BlackDecorator(new Chess::Pawn)), i, 6);
         }
-
-
-        /*QGraphicsPixmapItem *item = scene()->addPixmap(QPixmap(":/images/white_king.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
-
-        item = scene()->addPixmap(QPixmap(":/images/white_queen.png").scaled(100, 100, Qt::KeepAspectRatio));
-        item->setZValue(1);
-        item->setFlag(QGraphicsItem::ItemIsMovable, true);
-
-        for (int i = 0; i < 2; ++i) {
-            item = scene()->addPixmap(QPixmap(":/images/white_bishop.png").scaled(100, 100, Qt::KeepAspectRatio));
-            item->setZValue(1);
-            item->setFlag(QGraphicsItem::ItemIsMovable, true);
-
-            item = scene()->addPixmap(QPixmap(":/images/white_knight.png").scaled(100, 100, Qt::KeepAspectRatio));
-            item->setZValue(1);
-            item->setFlag(QGraphicsItem::ItemIsMovable, true);
-
-            item = scene()->addPixmap(QPixmap(":/images/white_rook.png").scaled(100, 100, Qt::KeepAspectRatio));
-            item->setZValue(1);
-            item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        }
-
-        for (int i = 0; i < 8; ++i) {
-            item = scene()->addPixmap(QPixmap(":/images/white_pawn.png").scaled(100, 100, Qt::KeepAspectRatio));
-            item->setZValue(1);
-            item->setFlag(QGraphicsItem::ItemIsMovable, true);
-        }*/
     }
 private:
     ChessBoard *board;
     QList<GameObject *> objects;
+};*/
+
+Registry registry;
+
+class MainWindow : public QWidget {
+    Q_OBJECT
+public:
+    MainWindow(QWidget *parent = nullptr)
+        : QWidget(parent)
+    {
+        initUi();
+    }
+
+    void initUi() {
+        QPushButton *connectButton = new QPushButton("Connect");
+        QPushButton *exitButton = new QPushButton("Exit");
+        QObject::connect(exitButton, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+        QObject::connect(connectButton, SIGNAL(clicked()), this, SLOT(connect()));
+
+        QVBoxLayout *mainLayout = new QVBoxLayout;
+        mainLayout->addWidget(connectButton);
+        mainLayout->addWidget(exitButton);
+
+        setLayout(mainLayout);
+        setFixedSize(QSize(150, 100));
+    }
+private slots:
+    void connect() {
+        qDebug() << "connect";
+        QTcpSocket *tcpSocket = new QTcpSocket;
+
+        tcpSocket->connectToHost("localhost", 1111);
+        if (tcpSocket->waitForConnected()) {
+            registry.setNetworkManager(new NetworkManager(tcpSocket));
+            QObject::connect(registry.getNetworkManager(), SIGNAL(newPacket(const std::string&)),
+                    this, SLOT(handlePacket(const std::string&)));
+        } else {
+            QMessageBox messageBox(QMessageBox::Critical, "ERROR", "Can't connect to server localhost:1111");
+            messageBox.exec();
+        }
+    }
+
+    void handlePacket(const std::string& packet) {
+        qDebug() << "handlePacket";
+    }
 };
+
+}
 
 int
 main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QGraphicsScene scene;
+
+    MainWindow mainWindow;
+    mainWindow.show();
+    /*QGraphicsScene scene;
     MainWindow mainWindow(&scene);
     mainWindow.setWindowTitle("Chess Online");
     mainWindow.setFixedSize(QSize(700, 700));
     mainWindow.move(QApplication::desktop()->screen()->rect().center() - mainWindow.rect().center());
-    mainWindow.show();
+    mainWindow.show();*/
     return app.exec();
 }
 

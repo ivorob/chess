@@ -50,8 +50,9 @@ Socket::bind(uint16_t port)
     service.sin_family = AF_INET;
     service.sin_addr.s_addr = INADDR_ANY;
     service.sin_port = htons(port);
-    ::bind(this->sockfd, (struct sockaddr *)&service, sizeof(service)); 
-    //TODO: check bind error
+    if (::bind(this->sockfd, (struct sockaddr *)&service, sizeof(service)) != 0) {
+        throw std::runtime_error("Binding error");
+    }
 }
 
 Socket

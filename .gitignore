@@ -11,3 +11,4 @@ qrc_*
 /chess-server/chess-server
 *tests
 *.a
+moc_*.cpp
