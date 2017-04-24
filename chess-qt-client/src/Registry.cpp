@@ -3,7 +3,6 @@
 Registry::Registry()
     : networkManager()
 {
-    this->networkManager = new NetworkManager;
 }
 
 Registry::~Registry()
@@ -15,4 +14,10 @@ NetworkManager *
 Registry::getNetworkManager() const
 {
     return this->networkManager;
+}
+
+void
+Registry::setNetworkManager(NetworkManager *networkManager)
+{
+    this->networkManager = networkManager;
 }

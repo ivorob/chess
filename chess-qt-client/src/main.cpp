@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <sstream>
 #include "MemoryStream.h"
+#include "Registry.h"
 #include "ChessBoard.h"
 #include "figures/Pawn.h"
 #include "figures/King.h"
@@ -12,6 +13,8 @@
 #include "figures/Bishop.h"
 #include "WhiteDecorator.h"
 #include "BlackDecorator.h"
+
+namespace {
 
 /*class MainWindow : public QGraphicsView {
     Q_OBJECT
@@ -89,6 +92,8 @@ private:
     QList<GameObject *> objects;
 };*/
 
+Registry registry;
+
 class MainWindow : public QWidget {
     Q_OBJECT
 public:
@@ -114,29 +119,31 @@ public:
 private slots:
     void connect() {
         qDebug() << "connect";
-        QTcpSocket *tcpSocket = new QTcpSocket(this);
+        QTcpSocket *tcpSocket = new QTcpSocket;
 
         tcpSocket->connectToHost("localhost", 1111);
         if (tcpSocket->waitForConnected()) {
-            MemoryStream stream;
-            stream.write(5); //size
-            stream.write(0); //command
-            stream.write(1); //version
-
-            const std::string& buffer = stream.str();
-            tcpSocket->write(buffer.c_str(), buffer.size());
-            qDebug() << tcpSocket->waitForBytesWritten();
+            registry.setNetworkManager(new NetworkManager(tcpSocket));
+            QObject::connect(registry.getNetworkManager(), SIGNAL(newPacket(const std::string&)),
+                    this, SLOT(handlePacket(const std::string&)));
         } else {
             QMessageBox messageBox(QMessageBox::Critical, "ERROR", "Can't connect to server localhost:1111");
             messageBox.exec();
         }
     }
+
+    void handlePacket(const std::string& packet) {
+        qDebug() << "handlePacket";
+    }
 };
+
+}
 
 int
 main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
 
     MainWindow mainWindow;
     mainWindow.show();

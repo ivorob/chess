@@ -9,6 +9,7 @@ public:
     virtual ~Registry();
 
     NetworkManager *getNetworkManager() const;
+    void setNetworkManager(NetworkManager *networkManager);
 private:
     NetworkManager *networkManager;
 };
