@@ -8,6 +8,6 @@ TEST(MemoryStreamTest, write)
     stream.write(0x17);
     stream.write(static_cast<uint8_t>(0x8));
 
-    std::string buffer("\x17\x00\x00\x00\x08\x00\x00\x00", 8);
-    ASSERT_EQ(buffer, stream.str());
+    QByteArray buffer("\x17\x00\x00\x00\x08\x00\x00\x00", 8);
+    ASSERT_EQ(buffer, stream.data());
 }

@@ -1,24 +1,25 @@
+#include <QString>
 #include "MemoryStream.h"
 
 MemoryStream::MemoryStream()
 {
 }
 
-const std::string&
-MemoryStream::str() const
+const QByteArray&
+MemoryStream::data() const
 {
-    return this->data;
+    return this->rawData;
 }
 
 void
 MemoryStream::write(uint32_t value)
 {
-    this->data.append((const char *)&value, sizeof(value));
+    this->rawData.append((const char *)&value, sizeof(value));
 }
 
 void
-MemoryStream::write(const std::string& data)
+MemoryStream::write(const QString& data)
 {
     write(static_cast<uint32_t>(data.size()));
-    this->data.append(data);
+    this->rawData.append(data);
 }
