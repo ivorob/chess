@@ -14,7 +14,7 @@ public:
     bool addToQueue(const std::string& data);
     std::string readFromQueue();
 signals:
-    void newPacket(const std::string& data);
+    void newPacket(const QByteArray& data);
 private slots:
     void process();
 private:

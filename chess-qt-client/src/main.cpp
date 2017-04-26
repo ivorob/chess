@@ -124,16 +124,16 @@ private slots:
         tcpSocket->connectToHost("localhost", 1111);
         if (tcpSocket->waitForConnected()) {
             registry.setNetworkManager(new NetworkManager(tcpSocket));
-            QObject::connect(registry.getNetworkManager(), SIGNAL(newPacket(const std::string&)),
-                    this, SLOT(handlePacket(const std::string&)));
+            QObject::connect(registry.getNetworkManager(), SIGNAL(newPacket(const QByteArray&)),
+                    this, SLOT(handlePacket(const QByteArray&)));
         } else {
             QMessageBox messageBox(QMessageBox::Critical, "ERROR", "Can't connect to server localhost:1111");
             messageBox.exec();
         }
     }
 
-    void handlePacket(const std::string& packet) {
-        qDebug() << "handlePacket";
+    void handlePacket(const QByteArray& packet) {
+        qDebug() << "handlePacket" << packet;
     }
 };
 
