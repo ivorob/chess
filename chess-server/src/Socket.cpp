@@ -11,7 +11,9 @@ Socket::Socket()
     : sockfd(INVALID_SOCKET)
 {
     this->sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    //TODO: test to INVALID_SOCKET
+    if (this->sockfd < 0) {
+        throw std::runtime_error("Can not allocate socket");
+    }
 }
 
 Socket::Socket(Socket&& socket)
@@ -42,7 +44,7 @@ void
 Socket::bind(uint16_t port)
 {
     if (port <= 1024) {
-        throw std::invalid_argument("Use port wich greater than 1024");
+        throw std::invalid_argument("Use port which greater than 1024");
     }
 
     struct sockaddr_in service;
