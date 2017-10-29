@@ -16,7 +16,7 @@
 
 namespace {
 
-/*class MainWindow : public QGraphicsView {
+class MainWindow : public QGraphicsView {
     Q_OBJECT
 public:
     MainWindow(QGraphicsScene *scene)
@@ -90,11 +90,11 @@ private:
 private:
     ChessBoard *board;
     QList<GameObject *> objects;
-};*/
+};
 
 Registry registry;
 
-class MainWindow : public QWidget {
+/*class MainWindow : public QWidget {
     Q_OBJECT
 public:
     MainWindow(QWidget *parent = nullptr)
@@ -135,7 +135,7 @@ private slots:
     void handlePacket(const QByteArray& packet) {
         qDebug() << "handlePacket" << packet;
     }
-};
+};*/
 
 }
 
@@ -144,15 +144,12 @@ main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-
-    MainWindow mainWindow;
-    mainWindow.show();
-    /*QGraphicsScene scene;
+    QGraphicsScene scene;
     MainWindow mainWindow(&scene);
     mainWindow.setWindowTitle("Chess Online");
     mainWindow.setFixedSize(QSize(700, 700));
     mainWindow.move(QApplication::desktop()->screen()->rect().center() - mainWindow.rect().center());
-    mainWindow.show();*/
+    mainWindow.show();
     return app.exec();
 }
 

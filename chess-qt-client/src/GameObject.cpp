@@ -27,7 +27,7 @@ GameObject::VisualObject *
 GameObject::obtainVisualObject()
 {
     if (this->visualObject == nullptr) {
-         QPixmap pixmap(":/images/" + getResource() + ".png");
+         QPixmap pixmap("themes/default/images/" + getResource() + ".png");
          this->visualObject = new QGraphicsPixmapItem(pixmap.scaled(100, 100, Qt::KeepAspectRatio));
          initVisualObject(this->visualObject);
     }

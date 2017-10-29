@@ -47,12 +47,15 @@ SET (HEADERS
         ${SRC_DIR}/NetworkManager.h
     )
 
-SET (RESOURCES
-        ${RESOURCE_DIR}/main.qrc)
-
 INCLUDE_DIRECTORIES (. src/)
 
 FIND_PACKAGE (Qt5 COMPONENTS Widgets Network)
 
-ADD_EXECUTABLE (chess-client WIN32 ${SOURCES} ${HEADERS} ${RESOURCES})
+ADD_EXECUTABLE (chess-client WIN32 ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES (chess-client Qt5::Widgets Qt5::Network)
+
+ADD_CUSTOM_COMMAND (TARGET chess-client
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_CURRENT_SOURCE_DIR}/themes
+        ${CMAKE_CURRENT_BINARY_DIR}/themes)
