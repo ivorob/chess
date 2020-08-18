@@ -1,0 +1,14 @@
+build/
+CMakeFiles/
+CMakeCache.txt
+*.moc
+*automoc.*
+chess-client
+*.swp*
+*.cmake
+Makefile
+qrc_*
+/chess-server/chess-server
+*tests
+*.a
+moc_*.cpp

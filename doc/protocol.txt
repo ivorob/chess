@@ -1,0 +1,22 @@
+packet    ::= uint32 command
+
+command   ::= "\x00" version        Hello
+            | "\x01"                Ping
+            | "\x02"                Pong
+            | "\x03"                Wait for opponent
+            | "\x04"                Accept request
+            | "\x05"                Reject request
+            | "\x06" body           Replicate game state
+
+version   ::= uint32              Current client/server version
+
+body      ::= count object1 object2 ... objectn
+
+object    ::= uint32 objectId classId operation       uint32 is sizeof object data
+objectId  ::= uint32
+classId   ::= string
+operation ::= "\x01"                Create object
+            | "\x02"                Destroy object
+            | "\x03" uint32 binary  Edit object
+
+string    ::= uint32 (byte*)        uint32 is the number bytes int the (byte*)
